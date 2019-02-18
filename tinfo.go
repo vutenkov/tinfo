@@ -16,7 +16,7 @@ import (
 )
 
 type Torrent struct {
-	Filepath  string
+	File      string
 	Name      string
 	Hash      string
 	Size      int64
@@ -147,7 +147,7 @@ func (torrent *Torrent) ToText() (string, error) {
 	}
 
 	return fmt.Sprintf(format,
-		torrent.Filepath,
+		torrent.File,
 		torrent.Name,
 		torrent.Hash,
 		torrent.CreatedBy,
@@ -228,7 +228,7 @@ func (ti TInfo) Run() (string, error) {
 		return "", fmt.Errorf("corrupted file at %v: %v", path, err)
 	}
 
-	torrent := Torrent{Filepath: path}
+	torrent := Torrent{File: path}
 	torrent.Parse(&rawTorrent)
 
 	var result string

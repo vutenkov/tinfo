@@ -22,7 +22,7 @@ func mustReadFile(path string) string {
 }
 
 func removeFilepath(json string) string {
-	re := regexp.MustCompile("\\s*\"Filepath\".+?,")
+	re := regexp.MustCompile("\\s*\"File\".+?,")
 	return re.ReplaceAllString(json, "")
 }
 
