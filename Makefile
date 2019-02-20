@@ -1,5 +1,5 @@
 .PHONY: build install test watch lint
-.DEFAULT_GOAL := install
+.DEFAULT_GOAL := build
 
 build:
 	go build
