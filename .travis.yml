@@ -12,5 +12,8 @@ git:
 notifications:
   email: false
 
+before_install:
+  - export TZ=Europe/Moscow
+
 script:
   - make test
