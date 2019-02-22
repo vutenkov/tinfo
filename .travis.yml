@@ -1,0 +1,16 @@
+language: go
+
+env:
+  - GO111MODULE=on
+
+go:
+  - 1.11.x
+
+git:
+  depth: 1
+
+notifications:
+  email: false
+
+script:
+  - make test
