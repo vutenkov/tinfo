@@ -1,7 +1,7 @@
 Name: Fedora-Workstation-Live-x86 64-29-1
 Hash: cfb532794574f81eded7a93343cfcdfe8460a5d7
 Created By: qBittorrent v4.1.5
-Created On: 2019-02-15 01:07:21 +0300 STD
+Created On: 2019-02-15 01:07:21 +0300 MSK
 Comment: This is a comment
 Piece Count: 3685
 Piece Size: 524288
