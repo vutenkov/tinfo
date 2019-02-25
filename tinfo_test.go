@@ -1,8 +1,10 @@
 package main_test
 
 import (
+	"fmt"
 	"io/ioutil"
 	"regexp"
+	"runtime"
 
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
@@ -33,7 +35,7 @@ var _ = BeforeSuite(func() {
 var _ = Describe("Tinfo", func() {
 	var (
 		app      TInfo
-		path     string
+		basename string
 		jsonMode bool
 		expected string
 		result   string
@@ -41,22 +43,30 @@ var _ = Describe("Tinfo", func() {
 
 	JustBeforeEach(func() {
 		app = TInfo{
-			Path:     path,
+			Path:     fmt.Sprintf("./testdata/%s.torrent", basename),
 			JSONMode: jsonMode,
 		}
 
 		result, _ = app.Run()
+
+		suffix := map[bool]string{
+			true:  "json",
+			false: "txt",
+		}
+
+		expected = mustReadFile(
+			fmt.Sprintf("./testdata/%s/%s.expected.%s", runtime.GOOS, basename, suffix[jsonMode]),
+		)
 	})
 
 	Context("when decoding a single-file torrent", func() {
 		BeforeEach(func() {
-			path = "./testdata/single-file-single-tracker.torrent"
+			basename = "single-file-single-tracker"
 		})
 
 		Context("and text mode is enabled", func() {
 			BeforeEach(func() {
 				jsonMode = false
-				expected = mustReadFile("./testdata/single-file-single-tracker.expected.txt")
 			})
 
 			It("should present the torrent as text", func() {
@@ -67,7 +77,6 @@ var _ = Describe("Tinfo", func() {
 		Context("and json mode is enabled", func() {
 			BeforeEach(func() {
 				jsonMode = true
-				expected = mustReadFile("./testdata/single-file-single-tracker.expected.json")
 			})
 
 			It("should present the torrent as JSON", func() {
@@ -78,13 +87,12 @@ var _ = Describe("Tinfo", func() {
 
 	Context("when decoding a multi-file torrent", func() {
 		BeforeEach(func() {
-			path = "./testdata/multi-files-single-trackers.torrent"
+			basename = "multi-files-single-trackers"
 		})
 
 		Context("and text mode is enabled", func() {
 			BeforeEach(func() {
 				jsonMode = false
-				expected = mustReadFile("./testdata/multi-files-single-trackers.expected.txt")
 			})
 
 			It("should present the torrent as text", func() {
@@ -95,7 +103,6 @@ var _ = Describe("Tinfo", func() {
 		Context("and json mode is enabled", func() {
 			BeforeEach(func() {
 				jsonMode = true
-				expected = mustReadFile("./testdata/multi-files-single-trackers.expected.json")
 			})
 
 			It("should present the torrent as JSON", func() {
@@ -106,13 +113,12 @@ var _ = Describe("Tinfo", func() {
 
 	Context("when decoding a multi-tracker torrent", func() {
 		BeforeEach(func() {
-			path = "./testdata/single-file-multi-tracker.torrent"
+			basename = "single-file-multi-tracker"
 		})
 
 		Context("and text mode is enabled", func() {
 			BeforeEach(func() {
 				jsonMode = false
-				expected = mustReadFile("./testdata/single-file-multi-tracker.expected.txt")
 			})
 
 			It("should present the torrent as text", func() {
@@ -123,7 +129,6 @@ var _ = Describe("Tinfo", func() {
 		Context("and json mode is enabled", func() {
 			BeforeEach(func() {
 				jsonMode = true
-				expected = mustReadFile("./testdata/single-file-multi-tracker.expected.json")
 			})
 
 			It("should present the torrent as JSON", func() {

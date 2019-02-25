@@ -1,0 +1,22 @@
+{
+  "Name": "Fedora-Workstation-Live-x86_64-29-1.2.iso",
+  "Hash": "da5b13b8ee35cd5cd1cad1ebf14c6d5c3a035b9a",
+  "Size": 1931476992,
+  "Trackers": [
+    "http://example.com/ann"
+  ],
+  "CreatedOn": "2019-02-15T01:04:19+03:00",
+  "CreatedBy": "qBittorrent v4.1.5",
+  "Comment": "This is a comment",
+  "Info": {
+    "PieceCount": 3684,
+    "PieceSize": 524288,
+    "Private": 0,
+    "Files": [
+      {
+        "Path": "Fedora-Workstation-Live-x86_64-29-1.2.iso",
+        "Size": 1931476992
+      }
+    ]
+  }
+}

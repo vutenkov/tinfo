@@ -13,5 +13,5 @@ indent_style = space
 [{*.go, Makefile}]
 indent_style = tab
 
-[testdata/*]
+[testdata/**/*]
 insert_final_newline = false
