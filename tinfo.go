@@ -86,19 +86,24 @@ func (torrent *Torrent) computeSize(parseTorrent *RawTorrent) {
 }
 
 func (torrent *Torrent) computeTrackers(parseTorrent *RawTorrent) {
-	trackers := map[string]bool{
+	trackers := []string{
+		parseTorrent.Announce,
+	}
+	alreadySeen := map[string]bool{
 		parseTorrent.Announce: true,
 	}
 
 	for _, group := range parseTorrent.AnnounceList {
 		for _, tracker := range group {
-			trackers[tracker] = true
+			_, ok := alreadySeen[tracker]
+			if !ok {
+				trackers = append(trackers, tracker)
+			}
+			alreadySeen[tracker] = true
 		}
 	}
 
-	for tracker := range trackers {
-		torrent.Trackers = append(torrent.Trackers, tracker)
-	}
+	torrent.Trackers = trackers
 }
 
 func (torrent *Torrent) ToJSON() (string, error) {
