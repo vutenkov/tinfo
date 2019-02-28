@@ -24,7 +24,7 @@ before_deploy:
 
 deploy:
   provider: releases
-  api_key: e41cfa7ab0921dd6020f9377390ae9c53422f611
+  api_key: ${GITHUB_TOKEN}
   file:
     - tinfo-${TRAVIS_TAG}-darwin-amd64.tgz
     - tinfo-${TRAVIS_TAG}-linux-amd64.tgz
