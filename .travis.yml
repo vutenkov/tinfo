@@ -24,8 +24,7 @@ before_deploy:
 
 deploy:
   provider: releases
-  api_key:
-    secure: WeJfsd4RRQoHVLt1UimmT3r8hePmvPT2m+GNcm/5DDIf/h/8QoWmKFAI3+J5tpVohOfeIwpMlb432KtlzmHAuYaJLetKtkb7TDJgvUfd8hfqrudB4X3P28NXPKPEjJhUfZMFymMvua1d3IK19nU5Qa2LmU25VlogbP+JvDhJW50cxmjuqzVjiDkDOKS8qv75zcxpFI0tbrltsmTuGkwLXGl2soqj4oTL8ru+brzihSrNzHygmL6LQL4dr1JYEpuGChSAjme6tdwdmXT6CczEO6zoXNOerfncAgmck2MNGbxWfHBFH7CISRlarsmUXaTy42XgMThJ8BSE2rX4IR7mjJqP0aUu0qPmZ1hLV9plvx0WUjRf97ZCPEnSYfkr4wpDjVHpt4tdevDYx9YyfA4mF1p9AsQfL+fyglmcw6p4RIbdyzTqgmUfuW0MR+fWudgVv2T9pNWF4pOuoMeRCfVf7kgaLt2wrtjjVEmFymdZNe4RxC+1gEXtohk+YkQ8/6d0RFIp5jbvkOVPI3qnQXmLAeOLHWYAnFer/ma+WGsHU2QCfYQ5KgiC/oT616PjU1uV4F+zaC+HHmq4WIWCGcXPneUlKZ3YRcO1JgUkcXYYsZ8DFPg+wvBxixG8vTRGySgJkJvXmcXWrzUuRJcdL0OU8mp5U2obFk9SLUGI6vRygrg=
+  api_key: e41cfa7ab0921dd6020f9377390ae9c53422f611
   file:
     - tinfo-${TRAVIS_TAG}-darwin-amd64.tgz
     - tinfo-${TRAVIS_TAG}-linux-amd64.tgz
