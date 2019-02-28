@@ -16,4 +16,23 @@ before_install:
   - export TZ=Europe/Moscow
 
 script:
-  - make test
+  - make ci
+
+before_deploy:
+  - make pack
+  - sha256sum *.tgz > sha256sums.txt
+
+deploy:
+  provider: releases
+  api_key:
+    secure: TShSx/K8P6ugkLzZ4D9O8mIVuo0U13gENTAUoXKo5UWn6fQ/Ayn5J/mtJYPs6wZ2T7wZTZHC43uA4ua3DsT7tYwsTom5jxMaDajEANwvKZi4BUHzEZdJc5aUonHaYCrOEJJyBXAL4mc6dnh0nwZ+N5I4z1U4bc9l7oy/y6Tp8e2He7Le7NPVpI+DUJUEP7RzD0tJznkvstcrqoA+BdJXy98e7NSTGUaDoII6gNQAWY9lq9iykASqWrg+RjJ90GDhPbFTWgYiBJAqy6PLEO9IcEbFn0s1MiniwUXiFzRFdrTdH63Z+iezf70jIBbV67pb1wPUF579deBp72paqCwwdzTdhaeXqsGAw+L4R649yX+1HEkQ+E9xT5NYi0vnkCwRSd9fEQoKBog7r+6IQHKHbkupMHKIa7f6MOtAv/LPPktqiCmS8gHFQB2TE61c1hIiGKwNH6FggP0q4SxkYk68A9NSQDl0qF65CW68EUi6dSngBkrazhsIuKdZeS4dmoN+hBYostNM0QERyhDwzrfHmf6bOXNRswIk8SD92UxbUO6gl5yZ0eaXZSjDaL1LFjkPH6nc4Ra0mAprPY1chv/2JbcWNTxe9nh08ObkvgiBQDMO9glgnFEYXWPt35EPracLRiwtRdrqd4JVsUY4fKnIjvUVnLDZ/YxeDvJagw6oyVw=
+  file:
+    - tinfo-${TRAVIS_TAG}-darwin-amd64.tgz
+    - tinfo-${TRAVIS_TAG}-linux-amd64.tgz
+    - tinfo-${TRAVIS_TAG}-windows-amd64.tgz
+    - sha256sums.txt
+  skip_cleanup: true
+  overwrite: true
+  on:
+    repo: vutenkov/tinfo
+    tags: true
