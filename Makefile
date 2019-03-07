@@ -20,33 +20,19 @@ lint:
 	golangci-lint run
 .PHONY: lint
 
-pack: clean linux darwin windows
-.PHONY: pack
-
 clean:
 	rm -f tinfo *.exe *.tgz
 .PHONY: clean
 
-darwin: GOOS=darwin
-darwin: GOARCH=amd64
-darwin:
-	GOOS=$(GOOS) GOARCH=$(GOARCH) go build -ldflags '-w -s'
-	tar cvzf tinfo-$(TRAVIS_TAG)-$(GOOS)-$(GOARCH).tgz tinfo
-.PHONY: darwin
-
-linux: GOOS=linux
-linux: GOARCH=amd64
-linux:
-	GOOS=$(GOOS) GOARCH=$(GOARCH) go build -ldflags '-w -s'
-	tar cvzf tinfo-$(TRAVIS_TAG)-$(GOOS)-$(GOARCH).tgz tinfo
-.PHONY: linux
-
-windows: GOOS=windows
-windows: GOARCH=amd64
-windows:
-	GOOS=$(GOOS) GOARCH=$(GOARCH) go build -ldflags '-w -s'
-	tar cvzf tinfo-$(TRAVIS_TAG)-$(GOOS)-$(GOARCH).tgz tinfo.exe
-.PHONY: windows
+pack: clean
+	GOOS=darwin GOARCH=amd64 go build -ldflags '-w -s' -o hello
+	tar cvzf hello-$(TRAVIS_TAG)-darwin-amd64.tgz hello
+	GOOS=linux GOARCH=amd64 go build -ldflags '-w -s' -o hello
+	tar cvzf hello-$(TRAVIS_TAG)-linux-amd64.tgz hello
+	GOOS=windows GOARCH=amd64 go build -ldflags '-w -s' -o hello.exe
+	tar cvzf hello-$(TRAVIS_TAG)-windows-amd64.tgz hello.exe
+	sha256sum *.tgz > sha256sums.txt
+.PHONY: pack
 
 ci: lint test
 .PHONY: ci
