@@ -23,7 +23,7 @@ lint:
 .PHONY: lint
 
 clean:
-	rm -f tinfo *.exe *.tgz
+	rm -f tinfo *.exe *.tgz sha256sums.txt
 .PHONY: clean
 
 pack: clean
