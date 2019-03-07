@@ -48,5 +48,5 @@ windows:
 	tar cvzf tinfo-$(TRAVIS_TAG)-$(GOOS)-$(GOARCH).tgz tinfo.exe
 .PHONY: windows
 
-ci: test
+ci: lint test
 .PHONY: ci
