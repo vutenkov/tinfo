@@ -28,7 +28,7 @@ deploy:
   file:
     - tinfo-${TRAVIS_TAG}-darwin-amd64.tgz
     - tinfo-${TRAVIS_TAG}-linux-amd64.tgz
-    - tinfo-${TRAVIS_TAG}-windows-amd64.tgz
+    - tinfo-${TRAVIS_TAG}-windows-amd64.zip
     - sha256sums.txt
   skip_cleanup: true
   overwrite: true

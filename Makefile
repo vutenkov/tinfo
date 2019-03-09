@@ -1,6 +1,7 @@
 .DEFAULT_GOAL := build
 
 NAME := tinfo
+BUILD_CMD := go build -ldflags '-w -s'
 
 build:
 	go build
@@ -23,16 +24,19 @@ lint:
 .PHONY: lint
 
 clean:
-	rm -f tinfo *.exe *.tgz sha256sums.txt
+	rm -f tinfo *.exe *.tgz *.zip sha256sums.txt
 .PHONY: clean
 
 pack: clean
-	GOOS=darwin GOARCH=amd64 go build -ldflags '-w -s' -o $(NAME)
+	GOOS=darwin GOARCH=amd64 $(BUILD_CMD) -o $(NAME)
 	tar cvzf $(NAME)-$(TRAVIS_TAG)-darwin-amd64.tgz $(NAME)
-	GOOS=linux GOARCH=amd64 go build -ldflags '-w -s' -o $(NAME)
+
+	GOOS=linux GOARCH=amd64 $(BUILD_CMD) -o $(NAME)
 	tar cvzf $(NAME)-$(TRAVIS_TAG)-linux-amd64.tgz $(NAME)
-	GOOS=windows GOARCH=amd64 go build -ldflags '-w -s' -o $(NAME).exe
-	tar cvzf $(NAME)-$(TRAVIS_TAG)-windows-amd64.tgz $(NAME).exe
+
+	GOOS=windows GOARCH=amd64 $(BUILD_CMD) -o $(NAME).exe
+	zip -9 $(NAME)-$(TRAVIS_TAG)-windows-amd64.zip $(NAME).exe
+
 	sha256sum *.tgz > sha256sums.txt
 .PHONY: pack
 

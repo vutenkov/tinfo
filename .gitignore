@@ -1,4 +1,5 @@
 tinfo
 *.exe
 *.tgz
+*.zip
 sha256sums.txt
