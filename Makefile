@@ -37,7 +37,7 @@ pack: clean
 	GOOS=windows GOARCH=amd64 $(BUILD_CMD) -o $(NAME).exe
 	zip -9 $(NAME)-$(TRAVIS_TAG)-windows-amd64.zip $(NAME).exe
 
-	sha256sum *.tgz > sha256sums.txt
+	sha256sum *.tgz *.zip > sha256sums.txt
 .PHONY: pack
 
 ci: lint test
